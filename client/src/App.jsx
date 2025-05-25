@@ -26,7 +26,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:3001/api/tutors', {
+      const res = await fetch('https://conexa-backend.onrender.com/api/tutors', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -44,7 +44,7 @@ function App() {
 
   const fetchTutors = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/tutors');
+      const res = await fetch('https://conexa-backend.onrender.com/api/tutors');
       const data = await res.json();
       setTutors(data);
     } catch (err) {
