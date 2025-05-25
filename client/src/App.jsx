@@ -109,10 +109,6 @@ function App() {
             />
           </div>
 
-          <pre style={{ backgroundColor: '#00000011', padding: '0.5rem', borderRadius: '8px' }}>
-            {JSON.stringify(tutors, null, 2)}
-          </pre>
-
           {filteredTutors.length === 0 ? (
             <p>No matching tutors found.</p>
           ) : (
