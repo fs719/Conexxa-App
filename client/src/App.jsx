@@ -31,8 +31,7 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-      
-      const data = await res.json();
+      await res.json();
       alert('Tutor submitted!');
       setFormData({ name: '', subject: '', year: '', bio: '', email: '' });
       setShowForm(false);
@@ -45,7 +44,7 @@ function App() {
 
   const fetchTutors = async () => {
     try {
-      const res = await fetch('https://conexa-backend.onrender.com/api/tutors');
+      const res = await fetch('https://conexxa-backend.onrender.com/api/tutors');
       const data = await res.json();
       setTutors(data);
     } catch (err) {
@@ -60,10 +59,9 @@ function App() {
   }, [showTutors]);
 
   const filteredTutors = tutors.filter((tutor) => {
-    return (
-      (!filterSubject || tutor.subject.toLowerCase().includes(filterSubject.toLowerCase())) &&
-      (!filterYear || tutor.year.toLowerCase().includes(filterYear.toLowerCase()))
-    );
+    const subjectMatch = !filterSubject || tutor.subject?.toLowerCase().includes(filterSubject.toLowerCase());
+    const yearMatch = !filterYear || tutor.year?.toLowerCase().includes(filterYear.toLowerCase());
+    return subjectMatch && yearMatch;
   });
 
   return (
@@ -110,6 +108,10 @@ function App() {
               style={inputStyle}
             />
           </div>
+
+          <pre style={{ backgroundColor: '#00000011', padding: '0.5rem', borderRadius: '8px' }}>
+            {JSON.stringify(tutors, null, 2)}
+          </pre>
 
           {filteredTutors.length === 0 ? (
             <p>No matching tutors found.</p>
